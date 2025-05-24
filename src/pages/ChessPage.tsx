@@ -128,17 +128,17 @@ const ChessPage: React.FC = () => {
     // 高亮上一步移动
     if (lastMove) {
       styles[lastMove.from] = {
-        backgroundColor: 'rgba(255, 255, 0, 0.4)'
+        background: 'rgba(255, 255, 0, 0.4)'
       };
       styles[lastMove.to] = {
-        backgroundColor: 'rgba(255, 255, 0, 0.4)'
+        background: 'rgba(255, 255, 0, 0.4)'
       };
     }
 
     // 高亮选中的方格
     if (selectedSquare) {
       styles[selectedSquare] = {
-        backgroundColor: 'rgba(255, 255, 0, 0.8)',
+        background: 'rgba(255, 255, 0, 0.8)',
         border: '2px solid #f39c12'
       };
     }
