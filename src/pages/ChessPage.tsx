@@ -145,58 +145,64 @@ const ChessPage: React.FC = () => {
 
     // 显示点击选中时的可移动位置
     possibleMoves.forEach(square => {
-      if (!styles[square]) {
-        styles[square] = {};
-      }
-
       // 检查该位置是否有对方棋子（可以吃掉）
       const pieceOnSquare = game.get(square);
       const isCapture = pieceOnSquare && pieceOnSquare.color !== game.turn();
 
+      // 获取当前方格的现有背景
+      const existingBackground = styles[square]?.background;
+
       if (isCapture) {
         // 可以吃掉对方棋子 - 显示攻击圆圈
+        const attackCircle = 'radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)';
+
         styles[square] = {
           ...styles[square],
-          background: styles[square].background
-            ? `${styles[square].background}, radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)`
-            : 'radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)'
+          background: existingBackground
+            ? `${existingBackground}, ${attackCircle}`
+            : attackCircle
         };
       } else {
         // 普通移动位置 - 显示小圆点
+        const moveDot = 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)';
+
         styles[square] = {
           ...styles[square],
-          background: styles[square].background
-            ? `${styles[square].background}, radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)`
-            : 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)'
+          background: existingBackground
+            ? `${existingBackground}, ${moveDot}`
+            : moveDot
         };
       }
     });
 
     // 显示拖拽时的可移动位置
     dragPossibleMoves.forEach(square => {
-      if (!styles[square]) {
-        styles[square] = {};
-      }
-
       // 检查该位置是否有对方棋子（可以吃掉）
       const pieceOnSquare = game.get(square);
       const isCapture = pieceOnSquare && pieceOnSquare.color !== game.turn();
 
+      // 获取当前方格的现有背景
+      const existingBackground = styles[square]?.background;
+
       if (isCapture) {
-        // 可以吃掉对方棋子 - 显示攻击圆圈（和点击一样的效果）
+        // 可以吃掉对方棋子 - 显示攻击圆圈
+        const attackCircle = 'radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)';
+
         styles[square] = {
           ...styles[square],
-          background: styles[square].background
-            ? `${styles[square].background}, radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)`
-            : 'radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)'
+          background: existingBackground
+            ? `${existingBackground}, ${attackCircle}`
+            : attackCircle
         };
       } else {
-        // 普通移动位置 - 显示小圆点（和点击一样的效果）
+        // 普通移动位置 - 显示小圆点
+        const moveDot = 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)';
+
         styles[square] = {
           ...styles[square],
-          background: styles[square].background
-            ? `${styles[square].background}, radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)`
-            : 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)'
+          background: existingBackground
+            ? `${existingBackground}, ${moveDot}`
+            : moveDot
         };
       }
     });
