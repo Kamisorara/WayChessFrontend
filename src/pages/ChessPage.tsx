@@ -148,12 +148,28 @@ const ChessPage: React.FC = () => {
       if (!styles[square]) {
         styles[square] = {};
       }
-      styles[square] = {
-        ...styles[square],
-        background: styles[square].background
-          ? `${styles[square].background}, radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)`
-          : 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)'
-      };
+
+      // 检查该位置是否有对方棋子（可以吃掉）
+      const pieceOnSquare = game.get(square);
+      const isCapture = pieceOnSquare && pieceOnSquare.color !== game.turn();
+
+      if (isCapture) {
+        // 可以吃掉对方棋子 - 显示攻击圆圈
+        styles[square] = {
+          ...styles[square],
+          background: styles[square].background
+            ? `${styles[square].background}, radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)`
+            : 'radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)'
+        };
+      } else {
+        // 普通移动位置 - 显示小圆点
+        styles[square] = {
+          ...styles[square],
+          background: styles[square].background
+            ? `${styles[square].background}, radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)`
+            : 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)'
+        };
+      }
     });
 
     // 显示拖拽时的可移动位置
@@ -161,12 +177,28 @@ const ChessPage: React.FC = () => {
       if (!styles[square]) {
         styles[square] = {};
       }
-      styles[square] = {
-        ...styles[square],
-        background: styles[square].background
-          ? `${styles[square].background}, radial-gradient(circle, rgba(129, 182, 76, 0.6) 30%, transparent 30%)`
-          : 'radial-gradient(circle, rgba(129, 182, 76, 0.6) 30%, transparent 30%)'
-      };
+
+      // 检查该位置是否有对方棋子（可以吃掉）
+      const pieceOnSquare = game.get(square);
+      const isCapture = pieceOnSquare && pieceOnSquare.color !== game.turn();
+
+      if (isCapture) {
+        // 可以吃掉对方棋子 - 显示攻击圆圈（和点击一样的效果）
+        styles[square] = {
+          ...styles[square],
+          background: styles[square].background
+            ? `${styles[square].background}, radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)`
+            : 'radial-gradient(circle, transparent 70%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.4) 80%, transparent 80%)'
+        };
+      } else {
+        // 普通移动位置 - 显示小圆点（和点击一样的效果）
+        styles[square] = {
+          ...styles[square],
+          background: styles[square].background
+            ? `${styles[square].background}, radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)`
+            : 'radial-gradient(circle, rgba(0,0,0,0.3) 25%, transparent 25%)'
+        };
+      }
     });
 
     return styles;
@@ -184,7 +216,7 @@ const ChessPage: React.FC = () => {
           </button>
 
           {/* 响应式棋盘容器 */}
-          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl aspect-square shadow-lg rounded-lg overflow-hidden">
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl aspect-square shadow-lg rounded-md overflow-hidden">
             <Chessboard
               id="BasicBoard"
               position={game.fen()}
