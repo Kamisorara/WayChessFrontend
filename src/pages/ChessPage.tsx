@@ -43,11 +43,11 @@ const ChessPage: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center p-2 sm:p-4 bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center p-2 sm:p-4 bg-[#302e2b]">
         <div className="flex flex-col items-center gap-2 sm:gap-4 w-full max-w-4xl">
           {/* 反转棋盘按钮 */}
           <button onClick={flipBoard}
-            className="px-3 py-2 sm:px-4 sm:py-3 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 rounded-md text-sm sm:text-base"
+            className="px-3 py-2 sm:px-4 sm:py-3 bg-[#81b64c] text-white hover:bg-[#9ac570] transition-colors duration-200 rounded-md text-sm sm:text-base"
           >
             翻转棋盘
           </button>
